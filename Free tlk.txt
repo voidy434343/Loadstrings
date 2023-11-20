@@ -1,0 +1,212 @@
+-- Values
+
+plr = game.Players.LocalPlayer
+local g = game
+local Players = g:FindFirstChildOfClass("Players")
+local ReplicatedStorage = g:FindFirstChildOfClass("ReplicatedStorage")
+local LocalPlayer = plr
+local Character = LocalPlayer.Character
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+local RootPart = Character:FindFirstChild("HumanoidRootPart")
+local oldPos
+
+local config = {
+   ["HeaderWidth"] = 250,
+   ["AccentColor"] = Color3.new(0.75,0,0)
+}
+local gui = loadstring(game:HttpGet("https://gitlab.com/0x45.xyz/droplib/-/raw/master/drop-minified.lua"))():Init(config,game.CoreGui)
+
+local PVP = gui:CreateCategory("PVP")
+local Defensive = PVP:CreateSection("Defensive")
+
+local Tools = gui:CreateCategory("Tools")
+local Get = Tools:CreateSection("Get Tool")
+
+local Map = gui:CreateCategory("Map")
+local Remove = Map:CreateSection("Remove")
+local Teleportation = Map:CreateSection("Teleportation")
+
+local Misc = gui:CreateCategory("Misc")
+local Teams = Misc:CreateSection("Teams")
+local Ps = Misc:CreateSection("Player Stuff")
+    
+Ps:CreateSelector("Goto Player",function(selected)
+    plr.character.HumanoidRootPart.CFrame = selected.character.HumanoidRootPart.CFrame
+end,function() return game.Players:GetPlayers() end,nil)
+
+Teams:CreateButton("Change To Prisoner",function() 
+    plr.PlayerGui.TeamChangePrisoner.Frame.Visible = true
+end)
+
+Teams:CreateButton("Change To Police",function() 
+    plr.PlayerGui.TeamChangePolice.Frame.Visible = true
+end)
+
+Teams:CreateButton("Change To Fugitive",function() 
+    plr.PlayerGui.TeamChangeFugitive.Frame.Visible = true
+end)
+
+Teams:CreateButton("Choosing Magic",function() 
+    plr.PlayerGui.Menu.OpenAndClose.Visible = true
+    plr.PlayerGui.Menu.GUI.Visible = true
+    plr.PlayerGui.Menu.TeamMenu.Visible = false
+    plr.PlayerGui.Stamina.StaminaBarFrame.Visible = true
+    plr.character.HumanoidRootPart.CFrame = CFrame.new(320.243, 3.08828, -96.6848)
+end)
+
+Teleportation:CreateButton("Prison",function() 
+    plr.character.HumanoidRootPart.CFrame = CFrame.new(50.227, 14.2692, -21.9349)
+end)
+
+Teleportation:CreateButton("Outside",function() 
+    plr.character.HumanoidRootPart.CFrame = CFrame.new(289.506, 3.05052, -295.087)
+end)
+
+Teleportation:CreateButton("Fugitive Base",function() 
+    plr.character.HumanoidRootPart.CFrame = CFrame.new(388.731, 3.10556, -81.3732)
+end)
+
+Remove:CreateButton("Remove Doors",function() 
+    for i,v in pairs(game.Workspace:GetDescendants()) do 	
+       if v.Name == "Door" then
+           v:Destroy()
+           end
+       end
+end)
+
+Remove:CreateButton("Remove JailBars",function() 
+    for i,v in pairs(game.Workspace:GetDescendants()) do 	
+       if v.Name == "JailBars" then
+           v:Destroy()
+           end
+       end
+end)
+
+Remove:CreateButton("Remove Misc",function() 
+    game.Workspace["Chain Link Fence Metal Gate Double Door"]:Destroy()
+end)
+
+Get:CreateButton("Axe",function() 
+    fireclickdetector(game.Workspace.Axe.ClickDetector)
+end)
+
+Get:CreateButton("Pickaxe",function() 
+    fireclickdetector(game.Workspace.Pickaxe.ClickDetector)
+end)
+
+Get:CreateButton("Knife",function() 
+    fireclickdetector(game.Workspace.Knife.ClickDetector)
+end)
+
+Get:CreateButton("Crowbar",function() 
+    fireclickdetector(game.Workspace.Crowbar.ClickDetector)
+end)
+
+Get:CreateButton("Bat",function() 
+    fireclickdetector(game.Workspace.table.Bat.ClickDetector)
+end)
+
+Get:CreateButton("Handcuffs and rope",function() 
+    fireclickdetector(game.Workspace["Handcuffs (fugitive)"].ClickDetector)
+    fireclickdetector(game.Workspace.Rope.ClickDetector)
+end)
+
+Get:CreateButton("Keycard",function() 
+    fireclickdetector(game.Workspace.KeyCard.ClickDetector)
+end)
+
+Get:CreateButton("Taser",function() 
+    fireclickdetector(game.Workspace:FindFirstChild("Taser").ClickDetector)
+end)
+
+Tools:CreateSwitch("Loop Get Fight Pack", function(bool) 
+    GetFight = bool
+     if bool then
+     while GetFight do
+        fireclickdetector(game.Workspace.Axe.ClickDetector)
+        fireclickdetector(game.Workspace.Food.Main.ClickDetector)
+        wait(0.05)
+     end
+end
+end,false)
+
+Tools:CreateSwitch("Loop Get Food", function(bool) 
+    GetFood = bool
+     if bool then
+     while GetFood do
+        fireclickdetector(game.Workspace.Food.Main.ClickDetector)
+        wait(0.05)
+     end
+end
+end,false)
+
+Tools:CreateSwitch("Loop Get Hamburger", function(bool) 
+    GetHam = bool
+     if bool then
+     while GetHam do
+        fireclickdetector(game.Workspace.Hamburger.ClickDetector)
+        wait(0.05)
+     end
+end
+end,false)
+
+Defensive:CreateSwitch("Infinite Sprint", function(bool) 
+    InfiniteSprint = bool
+    if bool then
+    while InfiniteSprint do
+        if FasterSprint then
+            plr.character:FindFirstChild("Humanoid").WalkSpeed = 30
+        else
+            plr.character:FindFirstChild("Humanoid").WalkSpeed = 25
+        end
+        wait(0.03)
+    end
+end
+end,false)
+
+Defensive:CreateTextLabel("---")
+
+Defensive:CreateSwitch("AutoHeal", function(bool) 
+    Autoheal = bool
+    if bool then
+    while Autoheal and wait(0.5) do
+        local hp = plr.character:FindFirstChild("Humanoid").Health
+        if hp ~= 100 then
+            local food = plr.Backpack:FindFirstChild("Food") or plr.Backpack:FindFirstChild("Hamburger")
+            local old = plr.character:FindFirstChildOfClass("Tool")
+            
+            plr.character:FindFirstChild("Humanoid"):EquipTool(food)
+            plr.character:FindFirstChild("Food"):Activate()
+            
+            wait()
+            
+            if old ~= nil then
+                plr.character:FindFirstChild("Humanoid"):EquipTool(old)
+                end
+            end
+        end
+    end
+end,false)
+
+Defensive:CreateTextLabel("---")
+
+Defensive:CreateSwitch("Anti Disable Inventory", function(bool) 
+    AntiDisable = bool
+    if bool then
+    while AntiDisable do
+        game.StarterGui:SetCoreGuiEnabled("Backpack", true)
+        wait(0.05)
+    end
+end
+end,false)
+
+Defensive:CreateSwitch("Anti Disable Jump", function(bool) 
+    AntiJump = bool
+    if bool then
+        while AntiJump do
+            plr.character.JumpLimit.Disabled = true
+            wait(5)
+            end
+        end
+end,false)
+	end)
