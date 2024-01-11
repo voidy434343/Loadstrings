@@ -9,9 +9,9 @@ public = false
 publicItalics = true
 --customize private logs
 privateProperties = {
-	Color = Color3.fromRGB(0,0,0); 
+	Color = Color3.fromRGB(0,255,255); 
 	Font = Enum.Font.SourceSansBold;
-	TextSize = 24;
+	TextSize = 16;
 }
 --////////////////////////////////////////////////////////////////
 local StarterGui = game:GetService("StarterGui")
@@ -27,7 +27,7 @@ local function onChatted(p,msg)
 		if p==player and msg:lower():sub(1,4)=="/spy" then
 			enabled = not enabled
 			wait(0.3)
-			privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+			privateProperties.Text = ""..(enabled and "EN" or "DIS").."ABLED}"
 			StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
 		elseif enabled and (spyOnMyself==true or p~=player) then
 			msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
@@ -57,7 +57,7 @@ end
 Players.PlayerAdded:Connect(function(p)
 	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
 end)
-privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+privateProperties.Text = ""..(enabled and "EN" or "DIS").."ABLED}"
 StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
 local chatFrame = player.PlayerGui.Chat.Frame
 chatFrame.ChatChannelParentFrame.Visible = true
