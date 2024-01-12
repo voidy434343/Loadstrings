@@ -31,7 +31,21 @@ local replaceWords = {
     ["here"] = "hewe",
     ["favorite"] = "favworite",
     ["duck"] = "duwk",
-    ["cat"] = "cwt"
+    ["cat"] = "cwt",
+    ["fur"] = "fuwr",
+    ["fursuit"] = "fuwrsuwit",
+    ["suit"] = "suwit",
+    ["like"] = "liwke",
+    ["you"] = "yowu",
+    ["run"] = "ruwn",
+    [":D"] = ":3",
+    [">:)"] = ">:3",
+    ["your"] = "yowur",
+    ["youre"] = "yowure",
+    ["little"] = "liwtle",
+    ["aww"] = "aww :3",
+    ["aw"] = "aw :3",
+    ["back"] = "bwck"
 }
 
 oldnc = hookmetamethod(game,"__namecall",function(...)
@@ -71,7 +85,7 @@ oldnc = hookmetamethod(game,"__namecall",function(...)
         end
         local last = string.sub(string,string.len(string),string.len(string)) 
             args[2] = string..""
-            local rng = math.random(1,5)
+            local rng = math.random(1,4)
             if rng == 1 then
                 args[2] = string..". Uwu!"
             end
