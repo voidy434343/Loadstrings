@@ -21,7 +21,9 @@ local replaceWords = {
     ["shut"] = "shwt",
     ["up"] = "uwp",
     ["pup"] = "puwp",
+    ["pups"] = "puwps",
     ["puppy"] = "puppwy",
+    ["puppies"] = "puppwies",
     ["why"] = "whwy",
     ["what"] = "whwt",
     ["and"] = "awnd",
@@ -45,7 +47,17 @@ local replaceWords = {
     ["little"] = "liwtle",
     ["aww"] = "aww :3",
     ["aw"] = "aw :3",
-    ["back"] = "bwck"
+    ["back"] = "bwck",
+    ["please"] = "pwease",
+    ["stop"] = "stowp",
+    ["seriously"] = "seriwouly",
+    ["serious"] = "seriwous",
+    ["fast"] = "fawst",
+    ["faster"] = "fawster",
+    ["hour"] = "howur",
+    ["half"] = "hawlf",
+    ["goodbye"] = "gwoodbye",
+    ["good"] = "gwood"
 }
 
 oldnc = hookmetamethod(game,"__namecall",function(...)
@@ -66,7 +78,6 @@ oldnc = hookmetamethod(game,"__namecall",function(...)
                     local a = string.sub(word,1,1)
                     local old = string.sub(word,2)
                     
-                    new[i] = a:upper()..old
                     else
                     new[i] = replaceWords[v]
                 end
@@ -85,7 +96,7 @@ oldnc = hookmetamethod(game,"__namecall",function(...)
         end
         local last = string.sub(string,string.len(string),string.len(string)) 
             args[2] = string..""
-            local rng = math.random(1,4)
+            local rng = math.random(1,5)
             if rng == 1 then
                 args[2] = string..". Uwu!"
             end
