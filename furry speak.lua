@@ -57,7 +57,9 @@ local replaceWords = {
     ["hour"] = "howur",
     ["half"] = "hawlf",
     ["goodbye"] = "gwoodbye",
-    ["good"] = "gwood"
+    ["good"] = "gwood",
+    ["ok"] = "okwy",
+    ["okay"] = "okwy"
 }
 
 oldnc = hookmetamethod(game,"__namecall",function(...)
@@ -77,8 +79,9 @@ oldnc = hookmetamethod(game,"__namecall",function(...)
                     local word = replaceWords[v]
                     local a = string.sub(word,1,1)
                     local old = string.sub(word,2)
-                    
-                    else
+
+                    new[i] = a:upper()..old
+                else
                     new[i] = replaceWords[v]
                 end
             end
