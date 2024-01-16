@@ -42,6 +42,7 @@ local replaceWords = {
     ["run"] = "ruwn",
     [":D"] = ":3",
     [">:)"] = ">:3",
+    [":)"] = ":3"
     ["your"] = "yowur",
     ["youre"] = "yowure",
     ["little"] = "liwtle",
@@ -59,7 +60,9 @@ local replaceWords = {
     ["goodbye"] = "gwoodbye",
     ["good"] = "gwood",
     ["ok"] = "okwy",
-    ["okay"] = "okwy"
+    ["okay"] = "okwy",
+    ["hello"] = "hewwo",
+    ["hey"] = "hewy"
 }
 
 oldnc = hookmetamethod(game,"__namecall",function(...)
