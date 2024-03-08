@@ -1,4 +1,3 @@
-library = function()
 Data = {
 	Accessory = {
 		"AccessoryType"
@@ -2249,4 +2248,3 @@ GetProperties = function(Instance)
 end
 
 return Data
-end
